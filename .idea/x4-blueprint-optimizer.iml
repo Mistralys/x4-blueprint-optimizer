@@ -13,6 +13,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/fortawesome/font-awesome" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/twbs/bootstrap" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mistralys/x4-core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mistralys/jtokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mistralys/application-localization" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
