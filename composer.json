@@ -1,0 +1,20 @@
+{
+  "name": "mistralys/x4-blueprint-optimizer",
+  "description": "PHP-based tool to optimize and reorder X4: Foundations blueprint XML files.",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sebastian Mordziol",
+      "email": "s.mordziol@mistralys.eu"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "src"
+    ]
+  },
+  "require": {
+    "mistralys/x4-core": "dev-main"
+  }
+}
