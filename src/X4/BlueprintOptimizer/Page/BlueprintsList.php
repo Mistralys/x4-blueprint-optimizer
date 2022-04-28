@@ -11,10 +11,11 @@ namespace Mistralys\X4\BlueprintOptimizer\Pages;
 
 use Mistralys\X4\BlueprintOptimizer\Blueprint;
 use Mistralys\X4\BlueprintOptimizer\UI\Page;
+use function AppUtils\t;
 
 /**
  * @package X4BlueprintOptimizer
- * @subpackage UserInterface
+ * @subpackage Pages
  * @author Sebastian Mordziol <s.mordziol@mistralys.eu>
  */
 class BlueprintsList extends Page
@@ -23,7 +24,7 @@ class BlueprintsList extends Page
 
     public function getTitle(): string
     {
-        return 'Available blueprints';
+        return t('Available blueprints');
     }
 
     public function getNavItems(): array
@@ -36,14 +37,23 @@ class BlueprintsList extends Page
         return array();
     }
 
+    protected function preRender() : void
+    {
+
+    }
+
     protected function _render(): void
     {
         $blueprints = $this->getApplication()->getBlueprints();
 
         $grid = $this->ui->createDataGrid();
-        $grid->addColumn('label', 'File name')
-            ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'getFileName'))
+
+        $grid->addColumn('label', t('Label'))
+            ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'getLabel'))
             ->decorateWith()->linkByMethod(array(Blueprint::class, 'getURLEdit'));
+
+        $grid->addColumn('name', t('File name'))
+            ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'getFileName'));
 
         $grid->addRowsFromObjects($blueprints->getAll());
 
