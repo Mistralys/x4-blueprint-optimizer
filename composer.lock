@@ -172,6 +172,61 @@
             "time": "2020-06-22T15:46:04+00:00"
         },
         {
+            "name": "mistralys/application-localization",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mistralys/application-localization.git",
+                "reference": "ff0cce325c07a1999b1ddde567f4d133fc82ee82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mistralys/application-localization/zipball/ff0cce325c07a1999b1ddde567f4d133fc82ee82",
+                "reference": "ff0cce325c07a1999b1ddde567f4d133fc82ee82",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "mistralys/application-utils": ">=1.2.0",
+                "mistralys/jtokenizer": ">=1.0.1",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "8.2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "AppLocalize\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Mordziol",
+                    "email": "s.mordziol@mistralys.eu",
+                    "role": "Lead"
+                }
+            ],
+            "description": "PHP and Javascript localization library.",
+            "support": {
+                "issues": "https://github.com/Mistralys/application-localization/issues",
+                "source": "https://github.com/Mistralys/application-localization/tree/1.4.1"
+            },
+            "time": "2021-08-10T11:40:20+00:00"
+        },
+        {
             "name": "mistralys/application-utils",
             "version": "dev-master",
             "source": {
@@ -238,17 +293,73 @@
             "time": "2022-04-28T06:18:16+00:00"
         },
         {
+            "name": "mistralys/jtokenizer",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mistralys/jtokenizer.git",
+                "reference": "4747ca0feb05bb3be90898288773ae708b697b2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mistralys/jtokenizer/zipball/4747ca0feb05bb3be90898288773ae708b697b2d",
+                "reference": "4747ca0feb05bb3be90898288773ae708b697b2d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpstan/phpstan": ">=0.12",
+                "phpunit/phpunit": ">=8.2.5"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Constants.php"
+                ],
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Whitlock",
+                    "homepage": "https://timwhitlock.info",
+                    "role": "Lead developer"
+                },
+                {
+                    "name": "Sebastian Mordziol",
+                    "email": "s.mordziol@mistralys.eu",
+                    "homepage": "https://mistralys.eu",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "Modernized, composer compatible version of Tim Whitlock's JTokenizer PHP Javascript parser and tokenizer library.",
+            "homepage": "https://github.com/Mistralys/jtokenizer",
+            "support": {
+                "issues": "https://github.com/Mistralys/jtokenizer/issues",
+                "source": "https://github.com/Mistralys/jtokenizer/tree/main"
+            },
+            "time": "2021-04-23T06:56:12+00:00"
+        },
+        {
             "name": "mistralys/x4-core",
             "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mistralys/x4-core.git",
-                "reference": "e971c1ba112e28632e55597d662ba2e45bfcca1b"
+                "reference": "c2e8e0be2733abf701a5d7e48ae57160c4cd89bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mistralys/x4-core/zipball/e971c1ba112e28632e55597d662ba2e45bfcca1b",
-                "reference": "e971c1ba112e28632e55597d662ba2e45bfcca1b",
+                "url": "https://api.github.com/repos/Mistralys/x4-core/zipball/c2e8e0be2733abf701a5d7e48ae57160c4cd89bf",
+                "reference": "c2e8e0be2733abf701a5d7e48ae57160c4cd89bf",
                 "shasum": ""
             },
             "require": {
@@ -257,6 +368,7 @@
                 "ext-mbstring": "*",
                 "ext-simplexml": "*",
                 "fortawesome/font-awesome": "^5.15.3",
+                "mistralys/application-localization": "^1.4.1",
                 "mistralys/application-utils": "dev-master",
                 "twbs/bootstrap": "^v4.6.0"
             },
@@ -286,7 +398,7 @@
                 "issues": "https://github.com/Mistralys/x4-core/issues",
                 "source": "https://github.com/Mistralys/x4-core/tree/main"
             },
-            "time": "2022-04-28T06:25:29+00:00"
+            "time": "2022-04-28T21:04:36+00:00"
         },
         {
             "name": "neitanod/forceutf8",
