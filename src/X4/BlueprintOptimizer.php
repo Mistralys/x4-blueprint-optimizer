@@ -10,9 +10,12 @@ declare(strict_types=1);
 namespace Mistralys\X4;
 
 use AppUtils\FileHelper;
+use AppUtils\FileHelper_Exception;
 use Mistralys\X4\BlueprintOptimizer\Collection;
 use Mistralys\X4\BlueprintOptimizer\Pages\BlueprintsList;
+use Mistralys\X4\BlueprintOptimizer\Pages\EditBlueprint;
 use Mistralys\X4\UI\UserInterface;
+use function AppUtils\t;
 
 /**
  * @package X4BlueprintOptimizer
@@ -26,12 +29,14 @@ class BlueprintOptimizer extends X4Application
 
     public function __construct(string $blueprintsFolder)
     {
-        $this->blueprintsFolder = $blueprintsFolder; 
+        parent::__construct();
+
+        $this->blueprintsFolder = $blueprintsFolder;
     }
 
     public function getTitle() : string
     {
-        return 'X4 Blueprint optimizer';
+        return t('X4 Blueprint optimizer');
     }
 
     public function getBlueprintsFolder() : string
@@ -39,6 +44,9 @@ class BlueprintOptimizer extends X4Application
         return $this->blueprintsFolder;
     }
 
+    /**
+     * @throws FileHelper_Exception
+     */
     public function getBlueprints() : Collection
     {
         if(isset($this->collection))
@@ -46,7 +54,7 @@ class BlueprintOptimizer extends X4Application
             return $this->collection;
         }
 
-        $collection = new Collection($this->getBlueprintsFolder());
+        $collection = new Collection($this, $this->getBlueprintsFolder());
 
         $this->collection = $collection;
 
@@ -56,6 +64,7 @@ class BlueprintOptimizer extends X4Application
     public function registerPages(UserInterface $ui) : void
     {
         $ui->registerPage(BlueprintsList::URL_NAME, BlueprintsList::class);
+        $ui->registerPage(EditBlueprint::URL_NAME, EditBlueprint::class);
     }
 
     public function getDefaultPageID() : ?string
