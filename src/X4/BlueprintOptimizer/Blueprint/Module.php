@@ -129,4 +129,9 @@ class Module
     {
         return $this->moduleDef->getLabel();
     }
+
+    public function isProduction() : bool
+    {
+        return $this->moduleDef->isProduction();
+    }
 }
