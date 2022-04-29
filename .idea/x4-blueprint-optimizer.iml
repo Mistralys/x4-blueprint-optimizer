@@ -15,6 +15,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/mistralys/x4-core" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mistralys/jtokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mistralys/application-localization" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/thomaspark/bootswatch" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
