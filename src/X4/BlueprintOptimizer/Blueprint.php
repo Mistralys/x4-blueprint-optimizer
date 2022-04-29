@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Mistralys\X4\BlueprintOptimizer;
 
 use AppUtils\FileHelper;
+use DateTime;
 use Mistralys\X4\BlueprintOptimizer\Blueprint\Module;
 use Mistralys\X4\BlueprintOptimizer\Pages\EditBlueprint;
+use Mistralys\X4\Database\Modules\ModuleCategories;
+use Mistralys\X4\Database\Races\RaceDef;
 
 class Blueprint
 {
@@ -35,6 +38,51 @@ class Blueprint
     public function getFileName() : string
     {
         return FileHelper::getFilename($this->xmlFile);
+    }
+
+    public function getDateModified() : DateTime
+    {
+        return FileHelper::getModifiedDate($this->getPath());
+    }
+
+    public function getRacesList() : string
+    {
+        $list = array();
+        $races = $this->getRaces(false);
+
+        foreach($races as $race)
+        {
+            $list[] = $race->getLabel();
+        }
+
+        return implode(', ', $list);
+    }
+
+    /**
+     * @return RaceDef[]
+     */
+    public function getRaces(bool $includeGeneric=true) : array
+    {
+        $result = array();
+        $modules = $this->getModules();
+
+        foreach($modules as $module)
+        {
+            $race = $module->getRace();
+            $id = $race->getID();
+
+            if(!$includeGeneric && $race->isGeneric())
+            {
+                continue;
+            }
+
+            if(!isset($result[$id]))
+            {
+                $result[$id] = $race;
+            }
+        }
+
+        return array_values($result);
     }
 
     public function getPath() : string
@@ -101,5 +149,53 @@ class Blueprint
     public function countModules() : int
     {
         return count($this->modules);
+    }
+
+    public function countProductions() : int
+    {
+        return count($this->getProductions());
+    }
+
+    /**
+     * @return Module[]
+     */
+    public function getProductions() : array
+    {
+        $result = array();
+        $modules = $this->getModules();
+
+        foreach ($modules as $module)
+        {
+            if($module->isProduction())
+            {
+                $result[] = $module;
+            }
+        }
+
+        return $result;
+    }
+
+    public function countStorages() : int
+    {
+        return count($this->getStorages());
+    }
+
+    /**
+     * @return Module[]
+     */
+    public function getStorages() : array
+    {
+        $modules = $this->getModules();
+        $result = array();
+
+        foreach($modules as $module)
+        {
+            if($module->getCategory()->getID() === ModuleCategories::CATEGORY_STORAGE)
+            {
+                $result[] = $module;
+            }
+        }
+
+        return $result;
     }
 }
