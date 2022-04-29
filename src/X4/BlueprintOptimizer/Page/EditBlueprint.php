@@ -12,6 +12,7 @@ namespace Mistralys\X4\BlueprintOptimizer\Pages;
 use Mistralys\X4\BlueprintOptimizer\Blueprint;
 use Mistralys\X4\BlueprintOptimizer\Collection;
 use Mistralys\X4\BlueprintOptimizer\UI\Page;use function AppLocalize\pt;
+use function AppUtils\t;
 
 /**
  * @package X4BlueprintOptimizer
@@ -30,9 +31,9 @@ class EditBlueprint extends Page
         return $this->blueprint->getLabel();
     }
 
-    public function getNavItems() : array
+    public function getNavTitle() : string
     {
-        return array();
+        return t('Edit');
     }
 
     protected function getURLParams() : array
