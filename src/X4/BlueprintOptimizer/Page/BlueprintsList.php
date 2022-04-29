@@ -27,9 +27,9 @@ class BlueprintsList extends Page
         return t('Available blueprints');
     }
 
-    public function getNavItems(): array
+    public function getNavTitle() : string
     {
-        return array();
+        return t('Blueprints');
     }
 
     protected function getURLParams() : array
@@ -52,8 +52,27 @@ class BlueprintsList extends Page
             ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'getLabel'))
             ->decorateWith()->linkByMethod(array(Blueprint::class, 'getURLEdit'));
 
+        $grid->addColumn('races', t('Race(s)'))
+            ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'getRacesList'));
+
+        $grid->addColumn('modules', t('Modules'))
+            ->alignRight()
+            ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'countModules'));
+
+        $grid->addColumn('productions', t('Productions'))
+            ->alignRight()
+            ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'countProductions'));
+
+        $grid->addColumn('storages', t('Storages'))
+            ->alignRight()
+            ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'countStorages'));
+
         $grid->addColumn('name', t('File name'))
             ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'getFileName'));
+
+        $grid->addColumn('modified', t('Modified'))
+            ->chooseFormat()->dateAuto(true, true)
+            ->useObjectValues()->fetchByMethod(array(Blueprint::class, 'getDateModified'));
 
         $grid->addRowsFromObjects($blueprints->getAll());
 
