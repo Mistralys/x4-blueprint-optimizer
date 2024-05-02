@@ -2,6 +2,7 @@
   "name": "mistralys/x4-blueprint-optimizer",
   "description": "PHP-based tool to optimize and reorder X4: Foundations blueprint XML files.",
   "minimum-stability": "dev",
+  "prefer-stable": true,
   "license": "MIT",
   "authors": [
     {
@@ -15,6 +16,7 @@
     ]
   },
   "require": {
-    "mistralys/x4-core": "dev-main"
+    "mistralys/x4-core": "dev-main",
+    "mistralys/changelog-parser": "^1.0"
   }
 }

@@ -11,6 +11,7 @@ namespace Mistralys\X4;
 
 use AppUtils\FileHelper;
 use AppUtils\FileHelper_Exception;
+use Mistralys\ChangelogParser\ChangelogParser;
 use Mistralys\X4\BlueprintOptimizer\Collection;
 use Mistralys\X4\BlueprintOptimizer\Pages\BlueprintsList;
 use Mistralys\X4\BlueprintOptimizer\Pages\EditBlueprint;
@@ -72,8 +73,19 @@ class BlueprintOptimizer extends X4Application
         return BlueprintsList::URL_NAME;
     }
 
+    private ?string $version = null;
+
     public function getVersion() : string
     {
-        return FileHelper::readContents(__DIR__.'/../../VERSION');
+        if(isset($this->version))
+        {
+            return $this->version;
+        }
+
+        $this->version = ChangelogParser::parseMarkdownFile(__DIR__.'/../../changelog.md')
+            ->requireLatestVersion()
+            ->getNumber();
+
+        return $this->version;
     }
 }
