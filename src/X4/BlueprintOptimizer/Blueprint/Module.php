@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mistralys\X4\BlueprintOptimizer\Blueprint;
 
 use Mistralys\X4\BlueprintOptimizer\Blueprint;
+use Mistralys\X4\BlueprintOptimizer\OptimizerException;
 use Mistralys\X4\Database\Modules\ModuleCategory;
 use Mistralys\X4\Database\Modules\ModuleDef;
 use Mistralys\X4\Database\Modules\ModuleDefs;
@@ -12,9 +13,11 @@ use Mistralys\X4\Database\Races\RaceDef;
 
 class Module
 {
+    public const ERROR_UNKNOWN_MODULE_ID = 156201;
+
     private Blueprint $blueprint;
     private int $index;
-    private string $moduleID;
+    private string $macro;
     private string $connection = '';
 
     /**
@@ -52,7 +55,17 @@ class Module
 
         $this->parseAttributes($xmlData['@attributes']);
 
-        $this->moduleDef = ModuleDefs::getInstance()->getByID($this->getID());
+        $moduleDef = ModuleDefs::getInstance()->findByMacro($this->getMacro());
+        if($moduleDef === null)
+        {
+            throw new OptimizerException(
+                'Unknown module ID: '.$this->getMacro(),
+                '',
+                self::ERROR_UNKNOWN_MODULE_ID
+            );
+        }
+
+        $this->moduleDef = $moduleDef;
 
         if(isset($xmlData['offset']['position']['@attributes']))
         {
@@ -77,7 +90,7 @@ class Module
     private function parseAttributes(array $attributes) : void
     {
         $this->index = (int)$attributes['index'];
-        $this->moduleID = $attributes['macro'];
+        $this->macro = $attributes['macro'];
 
         if(isset($attributes['connection']))
         {
@@ -110,9 +123,9 @@ class Module
         return $this->index;
     }
 
-    public function getID() : string
+    public function getMacro() : string
     {
-        return $this->moduleID;
+        return $this->macro;
     }
 
     public function getRace() : RaceDef
