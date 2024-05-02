@@ -32,6 +32,16 @@ class BlueprintsList extends Page
         return t('Blueprints');
     }
 
+    public function getSubtitle(): string
+    {
+        return '';
+    }
+
+    public function getAbstract(): string
+    {
+        return '';
+    }
+
     protected function getURLParams() : array
     {
         return array();

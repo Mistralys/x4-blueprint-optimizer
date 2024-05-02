@@ -36,6 +36,16 @@ class EditBlueprint extends Page
         return t('Edit');
     }
 
+    public function getSubtitle(): string
+    {
+        return '';
+    }
+
+    public function getAbstract(): string
+    {
+        return '';
+    }
+
     protected function getURLParams() : array
     {
         return array();
